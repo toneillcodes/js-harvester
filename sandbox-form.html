@@ -1,0 +1,61 @@
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="harvest.js"></script>
+</head>
+	<body>
+		<div>
+			<h3>testing harvest JS</h3>
+		</div>
+		<div>
+			<!-- 
+			form elements:
+			<input>			ex
+			<label>			NA
+			<select>		ex
+			<textarea>		ex
+			<button>		NA
+			<fieldset>		NA
+			<legend>		NA
+			<datalist>		Need to parse options
+			<output>		??
+			<option>		TODO
+			<optgroup>		TODO
+			-->
+			<form id="loginform">
+				<label>Username:</label><br />
+				<input id="username" name="username" type="text"/><br />
+				<label>Password:</label><br />
+				<input id="password" name="password" type="text"/><br />
+				<label for="os">Choose an OS:</label><br />
+				<select id="os" name="os">
+					<option value="windows">Windows</option>
+					<option value="linux">Linux</option>
+					<option value="ios">iOS</option>
+					<option value="android">Android</option>
+				</select><br />
+				<label for="vulns">Choose a vulnerability:</label><br />
+				<select id="vulns" name="vulns" size="4" multiple>
+					<option value="xss">XSS</option>
+					<option value="sqli">SQLi</option>
+					<option value="ssrf">SSRF</option>
+					<option value="ssti">SSTI</option>
+				</select><br />
+				<label for="aybabtu">Message:</label><br />
+				<textarea name="aybabtu" rows="10" cols="30">All your base are belong to us</textarea><br />
+				<label for="browserlist">Choose a browser:</label><br />
+				<input list="browsers" id="browserlist" name="browserlist">
+				<datalist id="browsers">
+					<option value="Edge">
+					<option value="Firefox">
+					<option value="Chrome">
+					<option value="Opera">
+					<option value="Safari">
+				</datalist><br />
+				<label for="range">Range:</label><input type="range" id="a" name="a" value="50"><br />
+				<label for="number">Number:</label><input type="number" id="b" name="b" value="25"><br />
+				<input type="submit">
+			</form>
+		</div>
+	</body>
+</html>
