@@ -1,5 +1,6 @@
 # js-harvester
-Exercise to develop a JavaScript web harvester.
+Exercise in data collection, exfiltration and obfuscation.
+Goal: create a lightweight, flexible and functional project using JavaScript
 # installation
 * Requires jQuery
 * Download and host script
