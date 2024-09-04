@@ -9,5 +9,7 @@ Exercise to develop a JavaScript web harvester.
 3. Update the settings in harvest.js
 4. Listen. . .
 # todo list
-* dynamic form binding and processing
-* obfuscation
+* ~~dynamic form binding and processing~~
+* code obfuscation
+* obfuscation for data exfiltration
+* remove jQuery dependency (maybe?)
