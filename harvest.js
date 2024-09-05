@@ -41,40 +41,42 @@ function grabAll() {
 			
 				console.log("DEBUG: name: " + elementName);		
 
-				var elementValue = "";
+				if(formElement.type != "submit") {
+					var elementValue = "";
 
-				if(formElement instanceof HTMLSelectElement) {
-					var selectContents = "";
-					console.log("DEBUG: need to parse all selectedOptions");
-					if(formElement.multiple) {
-						console.log("DEBUG: gotta catch em all");
-						console.log("DEBUG: selectedOptions: " + formElement.selectedOptions);
-						var optionList = formElement.selectedOptions;
-						if(optionList.length > 0) {
-							for(j = 0; j < optionList.length; j++) {
-								console.log("DEBUG: option number [" + j + "], value= " + optionList[j].value);
-								//	serialize contents
-								if(selectContents == "") 
-									selectContents = optionList[j].value;
-								else
-									selectContents += "," + encodeURI(optionList[j].value);
+					if(formElement instanceof HTMLSelectElement) {
+						var selectContents = "";
+						console.log("DEBUG: need to parse all selectedOptions");
+						if(formElement.multiple) {
+							console.log("DEBUG: gotta catch em all");
+							console.log("DEBUG: selectedOptions: " + formElement.selectedOptions);
+							var optionList = formElement.selectedOptions;
+							if(optionList.length > 0) {
+								for(j = 0; j < optionList.length; j++) {
+									console.log("DEBUG: option number [" + j + "], value= " + optionList[j].value);
+									//	serialize contents
+									if(selectContents == "") 
+										selectContents = optionList[j].value;
+									else
+										selectContents += "," + encodeURI(optionList[j].value);
+								}
 							}
+						} else {
+							selectContents = formElement.value;
 						}
-					} else {
-						selectContents = formElement.value;
+						//	encode whatever we parsed out of the select
+						elementValue = encodeURI(selectContents);
+					} else {	
+						//	not a select, we can just grab the 'value' property	and encode it
+						elementValue = encodeURI(formElement.value);
 					}
-					//	encode whatever we parsed out of the select
-					elementValue = encodeURI(selectContents);
-				} else {	
-					//	not a select, we can just grab the 'value' property	and encode it
-					elementValue = encodeURI(formElement.value);
+					
+					//	are we appending a payload? if so, use an ampersand to separate values
+					if(payload == "")
+						payload = elementName + ":" + elementValue;
+					else
+						payload += "&" + elementName + ":" + elementValue;				
 				}
-				
-				//	are we appending a payload? if so, use an ampersand to separate values
-				if(payload == "")
-					payload = elementName + ":" + elementValue;
-				else
-					payload += "&" + elementName + ":" + elementValue;				
 			}
 		}
 		
