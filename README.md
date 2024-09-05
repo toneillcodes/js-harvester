@@ -11,6 +11,7 @@ Goal: create a lightweight, flexible and functional project using JavaScript
 4. Listen. . .
 # todo list
 * ~~dynamic form binding and processing~~
+* support for exfiltration through configurable HTTP methods
 * code obfuscation
 * obfuscation for data exfiltration
 * remove jQuery dependency (maybe?)
