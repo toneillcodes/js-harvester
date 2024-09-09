@@ -1,5 +1,5 @@
 # js-harvester
-Exercise in data collection, exfiltration and obfuscation.
+Exercise in data collection, exfiltration and obfuscation.<br />
 Goal: create a lightweight, flexible and functional project using JavaScript
 # installation
 * Requires jQuery
@@ -11,7 +11,9 @@ Goal: create a lightweight, flexible and functional project using JavaScript
 4. Listen. . .
 # todo list
 * ~~dynamic form binding and processing~~
-* support for exfiltration through configurable HTTP methods
+* ~~support for exfiltration through configurable HTTP methods~~
+* use hash values to identify site and form IDs
+* ability to bind multiple forms dynamically
 * code obfuscation
 * obfuscation for data exfiltration
 * remove jQuery dependency (maybe?)
