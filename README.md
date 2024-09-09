@@ -1,6 +1,8 @@
 # js-harvester
 Exercise in data collection, exfiltration and obfuscation.<br />
 Goal: create a lightweight, flexible and functional project using JavaScript
+> [!CAUTION]
+> Disclaimer: Intended only for use on systems that you are legally authorized to access. 
 # installation
 * Requires jQuery
 * Download and host script
