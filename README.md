@@ -1,5 +1,5 @@
 # js-harvester
-A tool for pen testers/red teams to use in an engagement where data must be captured from a web form.
+A tool for pen testers to use in an engagement where data must be captured from a web form.
 > [!CAUTION]
 > Disclaimer: Intended only for use on systems that you are legally authorized to access. 
 # installation
@@ -14,7 +14,7 @@ A tool for pen testers/red teams to use in an engagement where data must be capt
 * ~~dynamic form binding and processing~~
 * ~~support for exfiltration through configurable HTTP methods~~
 * use hash values to identify site and form IDs
-* ability to bind multiple forms dynamically
+* ~~ability to bind multiple forms dynamically~~
 * code obfuscation
 * obfuscation for data exfiltration
 * remove jQuery dependency (maybe?)
