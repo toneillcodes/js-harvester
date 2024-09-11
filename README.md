@@ -1,6 +1,5 @@
 # js-harvester
-Exercise in data collection, exfiltration and obfuscation.<br />
-Goal: create a lightweight, flexible and functional project using JavaScript
+A tool for pen testers/red teams to use in an engagement where data must be captured from a web form.
 > [!CAUTION]
 > Disclaimer: Intended only for use on systems that you are legally authorized to access. 
 # installation
