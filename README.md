@@ -12,6 +12,10 @@ A tool for pen testers to use in an engagement where data must be captured from 
 <script type="text/javascript" src="harvest.js"></script>
 ```
 4. Run a HTTP or HTTPS service to receive data from the script
+```
+kali@hammer:~/dev/tools/js-harvester/server$ python3 -m http.server 
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+```
 6. Update the settings in harvest.js
 ```
 //var siteId = "updateme";
