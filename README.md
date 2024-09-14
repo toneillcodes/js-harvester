@@ -6,9 +6,13 @@ A tool for pen testers to use in an engagement where data must be captured from 
 * Requires jQuery
 * Download and host script
 # usage
-1. Identify target page and form to harvest data from
-2. Add harvest.js to the target page
-3. Update the settings in harvest.js
+1. Identify target page to harvest data from
+3. Add harvest.js to the target page
+```
+<script type="text/javascript" src="harvest.js"></script>
+```
+4. Run a HTTP or HTTPS service to receive data from the script
+6. Update the settings in harvest.js
 ```
 //var siteId = "updateme";
 //var formId = "updateme";
