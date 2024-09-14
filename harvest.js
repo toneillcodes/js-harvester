@@ -48,7 +48,6 @@ function bindByName(formName) {
 /* append tracking values to a form */
 function appendFields(form) {
     var formName = form.name;
-	console.log("appendFields function() formName = " + formName);
 	var siteId = btoa(document.location.hostname);
 	var formId = btoa(document.location.pathname + '-' + formName);
     $('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");
