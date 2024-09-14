@@ -1,6 +1,5 @@
-function decodeMe() {
+function decodeMe(encodedData) {
 	$('#decodeResult').html("");	//	clear previous results
-	var encodedData = $('#inputString').val();
 	console.log('using string: ' + encodedData);
 	var decodedBase64 = atob(encodedData);
 	console.log("decoded base 64: " + decodedBase64);
