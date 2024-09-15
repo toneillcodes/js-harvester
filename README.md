@@ -54,9 +54,11 @@ Keyboard interrupt received, exiting.
 * ~~support for exfiltration through configurable HTTP methods~~
 * ~~use hash values to identify site and form IDs~~
 * ~~ability to bind multiple forms dynamically~~
+* client feedback options
 * enhance decoder tools
 * change form processing to avoid using name or id properties
 * collect client information (IP, user agent, referer, timezone etc.)
+* customizable serialization separators
 * code obfuscation
 * obfuscation for data exfiltration
 * remove jQuery dependencies
