@@ -1,5 +1,4 @@
-//var siteId = "updateme";
-//var formId = "updateme";
+var dynamicTrackers = true;
 var bindAllFormsSwitch = true;
 var formName = "loginform2";
 var enableEncoding = true;
@@ -47,11 +46,18 @@ function bindByName(formName) {
 
 /* append tracking values to a form */
 function appendFields(form) {
-    var formName = form.name;
-	var siteId = btoa(document.location.hostname);
-	var formId = btoa(document.location.pathname + '-' + formName);
-    $('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");
-    $('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");
+    var formName = form.name;			//	TODO: remove form name usage
+	let siteId = "";
+	let formId = "";
+	if(dynamicTrackers) {
+		siteId = btoa(document.location.hostname);
+		formId = btoa(document.location.pathname + '-' + formName);
+	} else {
+		siteId = "updateme";
+		formId = "updateme";
+	}
+    $('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");		// TODO: remove form ID usage
+    $('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");		// TODO: remove form ID usage
 }
 
 /* parse through the form elements and serialize anything interesting */
