@@ -56,8 +56,23 @@ function appendFields(form) {
 		siteId = "updateme";
 		formId = "updateme";
 	}
-    $('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");		// TODO: remove form ID usage
-    $('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");		// TODO: remove form ID usage
+    //$('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");		// TODO: remove form ID usage
+    //$('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");		// TODO: remove form ID usage
+	
+	// create tracking siteId element
+	const siteIdElement = document.createElement("INPUT");
+	siteIdElement.setAttribute('type','hidden');
+	siteIdElement.setAttribute('name','siteId');
+	siteIdElement.setAttribute('value',siteId);
+	// create tracking formId element
+	const formIdElement = document.createElement("INPUT");
+	siteIdElement.setAttribute('type','hidden');
+	siteIdElement.setAttribute('name','formId');
+	siteIdElement.setAttribute('value',formId);
+
+	// add to target form
+	form.appendChild(siteIdElement);
+	form.appendChild(formIdElement);
 }
 
 /* parse through the form elements and serialize anything interesting */
