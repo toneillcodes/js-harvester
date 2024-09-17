@@ -41,31 +41,30 @@ function bindByName(formName) {
                 grabAll(formName);
             }, false);
     }
-    appendFields(formName);
+    appendFields(loginForm);
 }
 
 /* append tracking values to a form */
 function appendFields(form) {
-    var formName = form.name;			//	TODO: remove form name usage
+    let formName = form.name;			//	TODO: remove form name usage
 	let siteId = "";
 	let formId = "";
+	
 	if(dynamicTrackers) {
 		siteId = btoa(document.location.hostname);
-		formId = btoa(document.location.pathname + '-' + formName);
+		formId = btoa(document.location.pathname + '-' + form.name);
 	} else {
 		siteId = "updateme";
 		formId = "updateme";
 	}
-    //$('#' + formName).append("<input type='hidden' id='siteId' name='siteId' value='" + siteId + "'>");		// TODO: remove form ID usage
-    //$('#' + formName).append("<input type='hidden' id='formId' name='formId' value='" + formId + "'>");		// TODO: remove form ID usage
-	
+    	
 	// create tracking siteId element
-	const siteIdElement = document.createElement("INPUT");
+	let siteIdElement = document.createElement("INPUT");
 	siteIdElement.setAttribute('type','hidden');
 	siteIdElement.setAttribute('name','siteId');
 	siteIdElement.setAttribute('value',siteId);
 	// create tracking formId element
-	const formIdElement = document.createElement("INPUT");
+	let formIdElement = document.createElement("INPUT");
 	siteIdElement.setAttribute('type','hidden');
 	siteIdElement.setAttribute('name','formId');
 	siteIdElement.setAttribute('value',formId);
