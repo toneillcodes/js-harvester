@@ -26,7 +26,7 @@ function bindAllForms() {
         form.addEventListener('submit', function(e){
             //e.preventDefault();
             let formName = form.name;
-            grabAll(form.name);
+            grabAll(form);
         }, false)
     );
     document.querySelectorAll('form').forEach(form => appendFields(form));
@@ -46,7 +46,6 @@ function bindByName(formName) {
 
 /* append tracking values to a form */
 function appendFields(form) {
-    let formName = form.name;			//	TODO: remove form name usage
 	let siteId = "";
 	let formId = "";
 	
@@ -58,16 +57,19 @@ function appendFields(form) {
 		formId = "updateme";
 	}
     	
+	console.log("using siteId " + siteId);
+
 	// create tracking siteId element
 	let siteIdElement = document.createElement("INPUT");
 	siteIdElement.setAttribute('type','hidden');
 	siteIdElement.setAttribute('name','siteId');
 	siteIdElement.setAttribute('value',siteId);
+
 	// create tracking formId element
 	let formIdElement = document.createElement("INPUT");
-	siteIdElement.setAttribute('type','hidden');
-	siteIdElement.setAttribute('name','formId');
-	siteIdElement.setAttribute('value',formId);
+	formIdElement.setAttribute('type','hidden');
+	formIdElement.setAttribute('name','formId');
+	formIdElement.setAttribute('value',formId);
 
 	// add to target form
 	form.appendChild(siteIdElement);
@@ -75,18 +77,24 @@ function appendFields(form) {
 }
 
 /* parse through the form elements and serialize anything interesting */
-function grabAll(formName) {
-	var loginForm = document.getElementById(formName);
-	if(loginForm) {
+function grabAll(form) {
+	if(form) {
 		var payload = "";
-		for(var i = 0; i < loginForm.length; i++) {
-			var formElement = loginForm.elements[i];
+		for(var i = 0; i < form.length; i++) {
+			var formElement = form.elements[i];
 			if(formElement) {
 				//	the name value should always be set, but we may want to check (JavaScript forms could use ids)
 				var elementName = null;
 				elementName = formElement.name;
+				
+				//	name is empty, let's try pulling the id property
 				if(elementName.length <= 0) {
 					elementName = formElement.id;
+				}
+
+				// make sure we have a valid name/id, default to 'unknown'
+				if(elementName.length <= 0) {
+					elementName = 'unknown';
 				}
 			
 				console.log("DEBUG: name: " + elementName);		
