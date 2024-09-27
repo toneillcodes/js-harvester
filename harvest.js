@@ -189,12 +189,23 @@ function profileClient() {
 	productSub = window.navigator.productSub;
 	userAgent = window.navigator.userAgent;
 
+	if(pluginList.length) {
+		for(let i = 0; i < pluginList.length; i++ ) {
+			console.log("DEBUG: plugin details: " + pluginList[i].name)
+			if(serializedPlugins == "") {
+				serializedPlugins = pluginList[i].name;
+			} else {
+				serializedPlugins += "&" + pluginList[i].name;
+			}
+		}
+	}
+
 	//	populate an object to be serialized
-	clientData = [appCodeName,appName,appVersion,platform,pluginList,product,productSub,userAgent];
+	clientData = [appCodeName,appName,appVersion,platform,serializedPlugins,product,productSub,userAgent];
 	
 	console.log("DEBUG: clientData: " + clientData);
 	
-	return appVersion;
+	return clientData;
 }
 
 function serializeData(inputData) {
