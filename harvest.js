@@ -185,13 +185,15 @@ function profileClient() {
 	appVersion = window.navigator.appVersion
 	platform = window.navigator.platform;
 	pluginList = window.navigator.plugins;
-	if(pluginList != "") {
-		//pluginList.forEach((element) => console.log(element));
-	}
 	product = window.navigator.product;
 	productSub = window.navigator.productSub;
 	userAgent = window.navigator.userAgent;
 
+	//	populate an object to be serialized
+	clientData = [appCodeName,appName,appVersion,platform,pluginList,product,productSub,userAgent];
+	
+	console.log("DEBUG: clientData: " + clientData);
+	
 	return appVersion;
 }
 
